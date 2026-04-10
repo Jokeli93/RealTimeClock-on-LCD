@@ -17,7 +17,7 @@
  */
 
 #include <stdint.h>
-
+#include "ds1307.h"
 
 int main(void)
 {

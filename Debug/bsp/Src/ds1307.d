@@ -1,4 +1,5 @@
-bsp/ds1307.o: ../bsp/ds1307.c ../bsp/ds1307.h \
+bsp/Src/ds1307.o: ../bsp/Src/ds1307.c \
+ C:/Users/Joelikane/Desktop/Embedded_C_programming_coursera/Mastering_Microcontroller_Embedded_Driver_Development/MCU1_Course_Workspace/target/RealTimeClock_LCD/bsp/Inc/ds1307.h \
  C:/Users/Joelikane/Desktop/Embedded_C_programming_coursera/Mastering_Microcontroller_Embedded_Driver_Development/MCU1_Course_Workspace/target/RealTimeClock_LCD/drivers/Inc/stm32f407xx.h \
  C:/Users/Joelikane/Desktop/Embedded_C_programming_coursera/Mastering_Microcontroller_Embedded_Driver_Development/MCU1_Course_Workspace/target/RealTimeClock_LCD/drivers/Inc/stm32f407xx_gpio_driver.h \
  C:/Users/Joelikane/Desktop/Embedded_C_programming_coursera/Mastering_Microcontroller_Embedded_Driver_Development/MCU1_Course_Workspace/target/RealTimeClock_LCD/drivers/Inc/stm32f407xx.h \
@@ -6,7 +7,7 @@ bsp/ds1307.o: ../bsp/ds1307.c ../bsp/ds1307.h \
  C:/Users/Joelikane/Desktop/Embedded_C_programming_coursera/Mastering_Microcontroller_Embedded_Driver_Development/MCU1_Course_Workspace/target/RealTimeClock_LCD/drivers/Inc/stm32f407xx_i2c_driver.h \
  C:/Users/Joelikane/Desktop/Embedded_C_programming_coursera/Mastering_Microcontroller_Embedded_Driver_Development/MCU1_Course_Workspace/target/RealTimeClock_LCD/drivers/Inc/stm32f407xx_usart_driver.h \
  C:/Users/Joelikane/Desktop/Embedded_C_programming_coursera/Mastering_Microcontroller_Embedded_Driver_Development/MCU1_Course_Workspace/target/RealTimeClock_LCD/drivers/Inc/stm32f407xx_rcc_driver.h
-../bsp/ds1307.h:
+C:/Users/Joelikane/Desktop/Embedded_C_programming_coursera/Mastering_Microcontroller_Embedded_Driver_Development/MCU1_Course_Workspace/target/RealTimeClock_LCD/bsp/Inc/ds1307.h:
 C:/Users/Joelikane/Desktop/Embedded_C_programming_coursera/Mastering_Microcontroller_Embedded_Driver_Development/MCU1_Course_Workspace/target/RealTimeClock_LCD/drivers/Inc/stm32f407xx.h:
 C:/Users/Joelikane/Desktop/Embedded_C_programming_coursera/Mastering_Microcontroller_Embedded_Driver_Development/MCU1_Course_Workspace/target/RealTimeClock_LCD/drivers/Inc/stm32f407xx_gpio_driver.h:
 C:/Users/Joelikane/Desktop/Embedded_C_programming_coursera/Mastering_Microcontroller_Embedded_Driver_Development/MCU1_Course_Workspace/target/RealTimeClock_LCD/drivers/Inc/stm32f407xx.h:
