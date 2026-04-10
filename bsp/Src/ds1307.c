@@ -43,7 +43,7 @@ uint8_t ds1307_init(void)
 	ds1307_i2c_config();
 
 	//3. enable the I2C peripheral
-	I2C_PeriClockControl(DS1307_I2C, ENABLE);
+	I2C_PeripheralControl(DS1307_I2C, ENABLE);
 
 	//4. make clock halt = 0
 	//Note: for the first time the chip is powered the internal oscillator is automatically disable (CH bit = 1)

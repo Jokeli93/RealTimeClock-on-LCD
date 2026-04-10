@@ -62,7 +62,7 @@ main-build: RealTimeClock_LCD.elf secondary-outputs
 
 # Tool invocations
 RealTimeClock_LCD.elf RealTimeClock_LCD.map: $(OBJS) $(USER_OBJS) C:\Users\Joelikane\Desktop\Embedded_C_programming_coursera\Mastering_Microcontroller_Embedded_Driver_Development\MCU1_Course_Workspace\target\RealTimeClock_LCD\STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "RealTimeClock_LCD.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Joelikane\Desktop\Embedded_C_programming_coursera\Mastering_Microcontroller_Embedded_Driver_Development\MCU1_Course_Workspace\target\RealTimeClock_LCD\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="RealTimeClock_LCD.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "RealTimeClock_LCD.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Joelikane\Desktop\Embedded_C_programming_coursera\Mastering_Microcontroller_Embedded_Driver_Development\MCU1_Course_Workspace\target\RealTimeClock_LCD\STM32F407VGTX_FLASH.ld" -Wl,-Map="RealTimeClock_LCD.map" -Wl,--gc-sections -static --specs=rdimon.specs -lc -lrdimon --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

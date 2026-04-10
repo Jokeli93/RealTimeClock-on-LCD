@@ -9,6 +9,34 @@
 #include<stdio.h>
 #include "ds1307.h"
 
+extern void initialise_monitor_handles(void);
+
+#define SYSTICK_TIM_CLK		16000000UL
+
+void init_systick_timer(uint32_t tick_hz)
+{
+	uint32_t *pSRVR = (uint32_t*)0xE000E014;
+	uint32_t *pSCSR = (uint32_t*)0xE000E010;
+
+    /* calculation of reload value */
+    uint32_t count_value = (SYSTICK_TIM_CLK/tick_hz)-1;
+
+    //Clear the value of SVR
+    *pSRVR &= ~(0x00FFFFFFFF);
+
+    //load the value in to SVR
+    *pSRVR |= count_value;
+
+    //some settings
+    *pSCSR |= ( 1 << 1); //Enables SysTick exception request:
+    *pSCSR |= ( 1 << 2);  //Indicates the clock source, processor clock source
+
+    //enable the systick
+    *pSCSR |= ( 1 << 0); //enables the counter
+
+}
+
+
 char* get_day_of_week(uint8_t i)
 {
 	char* days[] = {"Mon","Tue","Wed","Thu","Fri","Sat", "Sun"};
@@ -65,18 +93,24 @@ char* date_to_string(RTC_date_t *rtc_date)
 
 }
 
+RTC_date_t current_date;
+RTC_time_t current_time;
+
 int main(void)
 {
-	RTC_date_t current_date;
-	RTC_time_t current_time;
+	initialise_monitor_handles();
 
-	printf("RTC test\n");
+	printf("RTC test\r\n");
+	fflush(stdout);
 
 	if(ds1307_init())
 	{
 		printf("RTC init failed\n");
 		while(1);
 	}
+
+	//initialize the SysTick timer
+	init_systick_timer(1);
 
 	current_date.day = FRIDAY;
 	current_date.date = 10;
@@ -104,6 +138,33 @@ int main(void)
 		printf("Current time = %s\n", time_to_string(&current_time)); // 06:05:00
 	}
 
-	// 10/04/26
+	// 10/04/26 <Fri>
 	printf("Current date = %s <%s>\n",date_to_string(&current_date), get_day_of_week(current_date.day));
+
+	while(1);
+
+	return 0;
+}
+
+
+
+void SysTick_Handler(void)
+{
+	ds1307_get_current_time(&current_time);
+
+	char *am_pm;
+	if(current_time.time_format != TIME_FORMAT_24HRS){
+		am_pm = (current_time.time_format) ? "PM" : "AM";
+		printf("Current time = %s %s\n", time_to_string(&current_time),am_pm); // 06:05:00 PM
+	}
+	else
+	{
+		printf("Current time = %s\n", time_to_string(&current_time)); // 06:05:00
+	}
+
+	ds1307_get_current_date(&current_date);
+
+	// 10/04/26 <Fri>
+	printf("Current date = %s <%s>\n",date_to_string(&current_date), get_day_of_week(current_date.day));
+
 }
