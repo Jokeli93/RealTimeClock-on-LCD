@@ -1,7 +1,8 @@
-../Src/017rtc_lcd.c:16:6:init_systick_timer	32	static
-../Src/017rtc_lcd.c:40:7:get_day_of_week	56	static
-../Src/017rtc_lcd.c:47:6:number_to_string	16	static
-../Src/017rtc_lcd.c:61:7:time_to_string	16	static
-../Src/017rtc_lcd.c:79:7:date_to_string	16	static
-../Src/017rtc_lcd.c:99:5:main	24	static
-../Src/017rtc_lcd.c:151:6:SysTick_Handler	24	static
+../Src/017rtc_lcd.c:17:6:init_systick_timer	32	static
+../Src/017rtc_lcd.c:41:7:get_day_of_week	56	static
+../Src/017rtc_lcd.c:48:6:number_to_string	16	static
+../Src/017rtc_lcd.c:62:7:time_to_string	16	static
+../Src/017rtc_lcd.c:80:7:date_to_string	16	static
+../Src/017rtc_lcd.c:97:6:mdelay	24	static
+../Src/017rtc_lcd.c:106:5:main	16	static
+../Src/017rtc_lcd.c:177:6:SysTick_Handler	16	static

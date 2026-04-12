@@ -18,9 +18,19 @@
 
 #include <stdint.h>
 #include "ds1307.h"
+#include "lcd.h"
 
 int main(void)
 {
+	lcd_init();
 
-	return 0;
+	while(1)
+	{
+		lcd_display_clear();
+
+		lcd_display_return_home();
+		lcd_print_string("RTC Test....");
+		for(uint32_t i; i <=1000; i++);
+	}
+
 }

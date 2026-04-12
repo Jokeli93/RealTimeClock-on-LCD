@@ -8,8 +8,9 @@
 
 #include<stdio.h>
 #include "ds1307.h"
+#include "lcd.h"
 
-extern void initialise_monitor_handles(void);
+//extern void initialise_monitor_handles(void);
 
 #define SYSTICK_TIM_CLK		16000000UL
 
@@ -93,15 +94,30 @@ char* date_to_string(RTC_date_t *rtc_date)
 
 }
 
+void mdelay(uint32_t cnt)
+{
+	for(uint32_t i=0 ; i < (cnt * 16000); i++);
+}
+
+
 RTC_date_t current_date;
 RTC_time_t current_time;
 
 int main(void)
 {
-	initialise_monitor_handles();
+	//initialise_monitor_handles();
 
-	printf("RTC test\r\n");
-	fflush(stdout);
+	//printf("RTC test\r\n");
+
+	lcd_init();
+
+	lcd_print_string("RTC Test...");
+
+	//mdelay(100);
+
+	lcd_display_clear();
+
+	lcd_display_return_home();
 
 	if(ds1307_init())
 	{
@@ -112,12 +128,12 @@ int main(void)
 	//initialize the SysTick timer
 	init_systick_timer(1);
 
-	current_date.day = FRIDAY;
-	current_date.date = 10;
+	current_date.day = SUNDAY;
+	current_date.date = 12;
 	current_date.month = 4;
 	current_date.year = 26;
 
-	current_time.hours = 6;
+	current_time.hours = 8;
 	current_time.minutes = 00;
 	current_time.seconds = 00;
 	current_time.time_format = TIME_FORMAT_12HRS_AM;
@@ -131,21 +147,31 @@ int main(void)
 	char *am_pm;
 	if(current_time.time_format != TIME_FORMAT_24HRS){
 		am_pm = (current_time.time_format) ? "PM" : "AM";
-		printf("Current time = %s %s\n", time_to_string(&current_time),am_pm); // 06:05:00 PM
+		//printf("Current time = %s %s\n", time_to_string(&current_time),am_pm); // 06:05:00 PM
+		lcd_set_cursor(1, 1);
+		lcd_print_string(time_to_string(&current_time));
+		lcd_print_char(' ');
+		lcd_print_string(am_pm);
 	}
 	else
 	{
-		printf("Current time = %s\n", time_to_string(&current_time)); // 06:05:00
+		//printf("Current time = %s\n", time_to_string(&current_time)); // 06:05:00
+		lcd_set_cursor(1, 1);
+		lcd_print_string(time_to_string(&current_time));
 	}
 
 	// 10/04/26 <Fri>
-	printf("Current date = %s <%s>\n",date_to_string(&current_date), get_day_of_week(current_date.day));
+	//printf("Current date = %s <%s>\n", date_to_string(&current_date), get_day_of_week(current_date.day));
+	lcd_set_cursor(2, 1);
+	lcd_print_string(date_to_string(&current_date));
+	lcd_print_string(" <");
+	lcd_print_string(get_day_of_week(current_date.day));
+	lcd_print_char('>');
 
 	while(1);
 
 	return 0;
 }
-
 
 
 void SysTick_Handler(void)
@@ -155,16 +181,28 @@ void SysTick_Handler(void)
 	char *am_pm;
 	if(current_time.time_format != TIME_FORMAT_24HRS){
 		am_pm = (current_time.time_format) ? "PM" : "AM";
-		printf("Current time = %s %s\n", time_to_string(&current_time),am_pm); // 06:05:00 PM
+		//printf("Current time = %s %s\n", time_to_string(&current_time),am_pm); // 06:05:00 PM
+		lcd_set_cursor(1, 1);
+		lcd_print_string(time_to_string(&current_time));
+		lcd_print_char(' ');
+		lcd_print_string(am_pm);
+
 	}
 	else
 	{
-		printf("Current time = %s\n", time_to_string(&current_time)); // 06:05:00
+		//printf("Current time = %s\n", time_to_string(&current_time)); // 06:05:00
+		lcd_set_cursor(1, 1);
+		lcd_print_string(time_to_string(&current_time));
 	}
 
 	ds1307_get_current_date(&current_date);
 
 	// 10/04/26 <Fri>
-	printf("Current date = %s <%s>\n",date_to_string(&current_date), get_day_of_week(current_date.day));
+	//printf("Current date = %s <%s>\n",date_to_string(&current_date), get_day_of_week(current_date.day));
+	lcd_set_cursor(2, 1);
+	lcd_print_string(date_to_string(&current_date));
+	lcd_print_string(" <");
+	lcd_print_string(get_day_of_week(current_date.day));
+	lcd_print_char('>');
 
 }

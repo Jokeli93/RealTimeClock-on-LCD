@@ -2,6 +2,7 @@
 "./Src/sysmem.o"
 "./Startup/startup_stm32f407vgtx.o"
 "./bsp/Src/ds1307.o"
+"./bsp/Src/lcd.o"
 "./drivers/Src/stm32f407xx_gpio_driver.o"
 "./drivers/Src/stm32f407xx_i2c_driver.o"
 "./drivers/Src/stm32f407xx_rcc_driver.o"
